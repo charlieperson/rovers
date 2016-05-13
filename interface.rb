@@ -24,6 +24,6 @@ class Interface
 
   def set_directions
     puts 'Where would you like me to go?'
-    @rover.directions = gets.chomp.split('')
+    rover.directions = gets.chomp.split('')
   end
 end

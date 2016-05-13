@@ -1,12 +1,13 @@
 class Rover
 
-  attr_accessor :location, :heading, :directions, :upper_right
+  attr_reader :plateau
+  attr_accessor :location, :heading, :directions
 
-  $orientation = {'N' => [0, 1], 'E' => [1, 0], 'S' => [0, -1], 'W' => [-1, 0]}
-  $nesw = ['N', 'E', 'S', 'W']
+  ORIENTATION= {'N' => [0, 1], 'E' => [1, 0], 'S' => [0, -1], 'W' => [-1, 0]}
+  NESW = ['N', 'E', 'S', 'W']
 
   def initialize(plateau, start_point)
-    @upper_right = plateau.upper_right
+    @plateau = plateau
     @heading = start_point[2]
     @location = [start_point[0].to_i, start_point[1].to_i]
   end
@@ -22,7 +23,7 @@ class Rover
       else
         abort('Not valid directions.')
       end
-      fallen?(location, upper_right)
+      fallen?(location, plateau.upper_right)
     end
     return location.join(' ') + ' ' + heading
   end
@@ -30,16 +31,16 @@ class Rover
   private
 
   def move(location, heading)
-    location[0] += $orientation[heading][0]
-    location[1] += $orientation[heading][1]
+    location[0] += ORIENTATION[heading][0]
+    location[1] += ORIENTATION[heading][1]
   end
 
   def turn_left(head)
-    @heading = $nesw[$nesw.index(head) - 1]
+    @heading = NESW[NESW.index(head) - 1]
   end
 
   def turn_right(head)
-    @heading == 'W' ? @heading = 'N' : @heading = $nesw[$nesw.index(head) + 1]
+    @heading == 'W' ? @heading = 'N' : @heading = NESW[NESW.index(head) + 1]
   end
 
   def fallen?(location, upper_right)
