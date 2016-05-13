@@ -3,9 +3,10 @@ class Rover
   attr_reader :directions, :upper_right, :nesw, :orientation
   attr_accessor :location, :heading
 
+  $orientation = {'N' => [0, 1], 'E' => [1, 0], 'S' => [0, -1], 'W' => [-1, 0]}
+  $nesw = ['N', 'E', 'S', 'W']
+
   def initialize
-    @orientation = {'N' => [0, 1], 'E' => [1, 0], 'S' => [0, -1], 'W' => [-1, 0]}
-    @nesw = ['N', 'E', 'S', 'W']
     puts 'What is the top right most coordinate?'
     @upper_right = gets.chomp.split(' ')
     puts 'Where is the rover currently?'
@@ -19,15 +20,11 @@ class Rover
   def find_my_rover
     directions.each do |d|
       if d == 'M'
-        location[0] += orientation[heading][0]
-        location[1] += orientation[heading][1]
-        puts location.to_s
+        move(location, heading)
       elsif d == 'L'
-        heading = nesw[nesw.index(heading) - 1]
-        puts 'heading: ' + heading
+        turn_left(heading)
       elsif d == 'R'
-        heading == 'W' ? heading = 'N' : heading = nesw[nesw.index(heading) + 1]
-        puts 'heading: ' + heading
+        turn_right(heading)
       else
         abort('Not valid directions.')
       end
@@ -37,6 +34,19 @@ class Rover
   end
 
   private
+
+  def move(location, heading)
+    location[0] += $orientation[heading][0]
+    location[1] += $orientation[heading][1]
+  end
+
+  def turn_left(head)
+    @heading = $nesw[$nesw.index(head) - 1]
+  end
+
+  def turn_right(head)
+    @heading == 'W' ? @heading = 'N' : @heading = $nesw[$nesw.index(head) + 1]
+  end
 
   def fallen?(location, upper_right)
     abort('You fell') if location[0] < 0 || location[0] > upper_right[0].to_i || location[1] < 0 || location[1] > upper_right[1].to_i
