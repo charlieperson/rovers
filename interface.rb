@@ -19,9 +19,7 @@ class Interface
   def set_location
     puts 'Where is the rover currently?'
     start_point = gets.chomp.split(' ')
-    @rover = Rover.new(plateau)
-    @rover.heading = start_point[2]
-    @rover.location = [start_point[0].to_i, start_point[1].to_i]
+    @rover = Rover.new(plateau, start_point)
   end
 
   def set_directions

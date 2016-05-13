@@ -5,8 +5,10 @@ class Rover
   $orientation = {'N' => [0, 1], 'E' => [1, 0], 'S' => [0, -1], 'W' => [-1, 0]}
   $nesw = ['N', 'E', 'S', 'W']
 
-  def initialize(plateau)
+  def initialize(plateau, start_point)
     @upper_right = plateau.upper_right
+    @heading = start_point[2]
+    @location = [start_point[0].to_i, start_point[1].to_i]
   end
 
   def find_my_rover
