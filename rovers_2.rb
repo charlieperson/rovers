@@ -5,6 +5,10 @@ class Rover
   $orientation = {'N' => [0, 1], 'E' => [1, 0], 'S' => [0, -1], 'W' => [-1, 0]}
   $nesw = ['N', 'E', 'S', 'W']
 
+  def initialize(plateau)
+    @upper_right = plateau.upper_right
+  end
+
   def find_my_rover
     directions.each do |d|
       if d == 'M'
