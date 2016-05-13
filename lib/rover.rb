@@ -12,7 +12,7 @@ class Rover
     @location = [start_point[0].to_i, start_point[1].to_i]
   end
 
-  def find_my_rover
+  def navigate
     directions.each do |d|
       if d == 'M'
         move(location, heading)
