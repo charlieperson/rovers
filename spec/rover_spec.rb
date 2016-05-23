@@ -1,8 +1,9 @@
-require 'rover.rb'
+require "spec_helper"
+require 'rover'
 
-describe Rover do
-  let(:plateau) {double(:plateau)}
-  subject(:rover) {described_class.new(plateau, [1, 2, 'N'])}
+RSpec.describe Rover do
+  let(:plateau) { double(:plateau) }
+  subject(:rover) { described_class.new(plateau, [1, 2, 'N']) }
 
   describe '#initialize' do
     it 'initializes with appropriate values' do
@@ -11,6 +12,7 @@ describe Rover do
       expect(rover.location).to eq([1, 2])
     end
   end
+
   describe '#navigate' do
     it 'can find the coordinates if input is valid' do
       allow(plateau).to receive(:upper_right).and_return([5,5])

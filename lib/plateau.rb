@@ -3,5 +3,6 @@ class Plateau
 
   def initialize(upper_right)
     @upper_right = upper_right
+    @min_coordinates = [0, 0]
   end
 end

@@ -1,4 +1,5 @@
 class Rover
+  class OutOfBounds < RuntimeError; end
 
   attr_reader :plateau
   attr_accessor :location, :heading, :directions
@@ -21,6 +22,7 @@ class Rover
       elsif d == 'R'
         turn_right(heading)
       else
+        raise InvalidDr, 'fdfdjfk'
         abort('Not valid directions.')
       end
       fallen?(location, plateau.upper_right)

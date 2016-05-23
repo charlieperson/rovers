@@ -1,6 +1,7 @@
+require_relative 'rover'
+require_relative 'plateau'
+
 class Interface
-  require_relative 'rover'
-  require_relative 'plateau'
 
   attr_reader :rover, :plateau
 
